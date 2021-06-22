@@ -21,4 +21,12 @@ class Gallery extends Model
     public function photos(){
         return $this->hasMany(Photo::class);
     }
+
+    public static function searchNaziv($naziv=''){
+        return self::where('naziv','LIKE',"%$naziv%");
+    }
+
+    // public static function searchOpis($opis=''){
+    //     return self::where('opis','LIKE',"%$opis%");
+    // }
 }

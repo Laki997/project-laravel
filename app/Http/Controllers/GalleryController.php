@@ -14,9 +14,15 @@ class GalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request)
+
     {
-        return Gallery::orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
+        $termNaziv = $request->query('naziv','');
+        // $termOpis = $request->query('opis','');
+
+        
+
+        return Gallery::searchNaziv($termNaziv)->orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
 
         
     }
