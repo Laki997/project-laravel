@@ -43,6 +43,10 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function galleries(){
+        return $this->hasMany(Gallery::class);
+    }
+
     public function getJWTCustomClaims()
     {
         return [];
