@@ -27,9 +27,10 @@ class GalleryRequest extends FormRequest
             'naziv' => 'string|required|min:2|max:255',
             'opis' => 'string|max:1000',
             // 'inputs' => ['regex:/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i'],
-            'inputs' => 'required'
-            // 'inputs' =>['regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/']
-            
+            'inputs' => 'required|array',
+            // 'inputs.*.url' => ['required', 'string', 'regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/']
+            'inputs.*.url' => ['required','string','url', 'regex:/.(jpg|png)($|\?.*)/']
+        
         ];
     }
 }

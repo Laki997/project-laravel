@@ -16,6 +16,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
+        return Gallery::orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
+
         
     }
 
@@ -39,37 +41,22 @@ class GalleryController extends Controller
     {
         $data = $request->validated();
  
-        
-    
         $user = auth('api')->user();
         
-     
-       ;
         $photos = [];
        
-        
-
         foreach($data['inputs'] as $inputs){
             foreach($inputs as $value){
 
-                $photos [] = $inputs;
-                
-      
-                
+                $photos [] = $inputs;   
             }
             
         }
         
         $gallery = $user->galleries()->create(['naziv' => $data['naziv'], 'opis' => $data['opis']]);
        
-
-
         $gallery->photos()->createMany($photos);
       
-        info($data);
-      
-   
-
     }
 
     /**

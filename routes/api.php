@@ -25,5 +25,5 @@ Route::post('register',[AuthController::class,'register']);
 Route::post('logout',[AuthController::class,'logout']);
 
 
-
+Route::get('/galleries',[GalleryController::class,'index']);
 Route::post('/galleries',[GalleryController::class,'store']);
