@@ -21,6 +21,10 @@ class Gallery extends Model
     public function photos(){
         return $this->hasMany(Photo::class);
     }
+    
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 
     // public static function searchNaziv($term=''){
     //     return self::where('naziv','LIKE',"%$term%");
