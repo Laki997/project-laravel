@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,6 @@ Route::post('logout',[AuthController::class,'logout']);
 
 Route::get('/galleries',[GalleryController::class,'index']);
 Route::post('/galleries',[GalleryController::class,'store']);
+Route::get('/galleries/{id}',[GalleryController::class,'show']);
+
+Route::get('/users/{id}',[UserController::class,'show']);

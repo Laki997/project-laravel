@@ -17,12 +17,22 @@ class GalleryController extends Controller
     public function index( Request $request)
 
     {
-        $termNaziv = $request->query('naziv','');
+        
+        $term = $request->input([0]);
+        info($term);
         // $termOpis = $request->query('opis','');
 
         
 
-        return Gallery::searchNaziv($termNaziv)->orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
+        return Gallery::where('naziv',"LIKE","%$term%")->orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
+
+       
+
+       
+
+        
+
+       
 
         
     }
@@ -73,7 +83,13 @@ class GalleryController extends Controller
      */
     public function show($id)
     {
-        //
+        
+     return Gallery::with('photos')->with('user')->find($id);
+
+     
+    
+        
+    
     }
 
     /**

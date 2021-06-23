@@ -22,9 +22,9 @@ class Gallery extends Model
         return $this->hasMany(Photo::class);
     }
 
-    public static function searchNaziv($naziv=''){
-        return self::where('naziv','LIKE',"%$naziv%");
-    }
+    // public static function searchNaziv($term=''){
+    //     return self::where('naziv','LIKE',"%$term%");
+    // }
 
     // public static function searchOpis($opis=''){
     //     return self::where('opis','LIKE',"%$opis%");
