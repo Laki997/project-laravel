@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login',[AuthController::class,'login']);
 Route::post('register',[AuthController::class,'register']);
 Route::post('logout',[AuthController::class,'logout']);
-
+Route::get('me',[AuthController::class,'me']);
 
 Route::get('/galleries',[GalleryController::class,'index']);
 Route::post('/galleries',[GalleryController::class,'store']);
