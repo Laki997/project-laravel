@@ -17,16 +17,24 @@ class GalleryController extends Controller
     public function index( Request $request)
 
     {
+        info($request);
+        $term = $request->input('term');
         
-        $term = $request->input([0]);
-        info($term);
-        // $termOpis = $request->query('opis','');
+      
 
         
 
-        return Gallery::where('naziv',"LIKE","%$term%")->orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
+        $galleries = Gallery::where('naziv',"like","%$term%")->orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
 
-       
+        if (!$galleries){
+            return response()->json(['message'=>'Nazalost ne postoji nijedna galerija, kreirajte novu!']);
+        }
+
+        return $galleries;
+
+        
+
+      
 
        
 
