@@ -36,3 +36,4 @@ Route::get('/users/{id}',[UserController::class,'show']);
 
 Route::post('/comments',[CommentsController::class,'store']);
 Route::get('/galleries/{id}/comments',[CommentsController::class,'index']);
+Route::delete('/comments/{id}',[CommentsController::class,'destroy']);
