@@ -35,3 +35,4 @@ Route::get('/galleries/{id}',[GalleryController::class,'show']);
 Route::get('/users/{id}',[UserController::class,'show']);
 
 Route::post('/comments',[CommentsController::class,'store']);
+Route::get('/galleries/{id}/comments',[CommentsController::class,'index']);

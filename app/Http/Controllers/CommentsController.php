@@ -28,36 +28,12 @@ class CommentsController extends Controller
         // return Gallery::find($request->input('gallery_id'));
      
     }
+
+
+    public function index($id){
+
+        return Comment::with('user')->where('gallery_id',$id)->get();
+    }
 }
         
-        // $gallery = Gallery::find($gallery_id);
-        // info($gallery);
-
-        // $data = $request->validated();
-
-        
-
-        // $user = auth('api')->user();
-
-        // $user->comments()->create(['gallery_id' => intval($data['gallery_id']), 'body' => $data['body']]);
-
-
-    //    return Comment::create($data['body'], $user->id,$gallery_id);
-
-        
-
-    //    $gallery = Gallery::find($gallery_id);
-
-    //     $comment = new Comment();
-
-    //     $comment->user_id = $user->id;
-    //     $comment->gallery_id = $gallery_id;
-    //     $comment->body = $data['body'];
-
-    //     $comment->save();
-
-    //     $comment->user = $user;
-    //     $comment->gallery = $gallery;
-
-    //     return $comment->with('user');
-
+      
