@@ -13,5 +13,10 @@ class UserController extends Controller
         $user = User::find($id);
 
        return Gallery::where('user_id', $user->id)->with('photos')->with('user')->get();
+
+
+        // $gallery =  Gallery::with('user')->where('user_id',$user->id)->with('photos')->paginate(3);
+
+       
     }
 }

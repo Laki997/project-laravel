@@ -23,19 +23,19 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('login',[AuthController::class,'login']);
-Route::post('register',[AuthController::class,'register']);
-Route::post('logout',[AuthController::class,'logout']);
-Route::get('me',[AuthController::class,'me']);
+Route::post('login',[AuthController::class,'login'])->middleware('guest:api');
+Route::post('register',[AuthController::class,'register'])->middleware('guest:api');
+Route::post('logout',[AuthController::class,'logout'])->middleware('auth:api');
+Route::get('me',[AuthController::class,'me'])->middleware('auth:api');
 
 Route::get('/galleries',[GalleryController::class,'index']);
 Route::post('/galleries',[GalleryController::class,'store']);
 Route::get('/galleries/{id}',[GalleryController::class,'show']);
-Route::put('/galleries/{id}',[GalleryController::class,'update']);
-Route::delete('/galleries/{id}',[GalleryController::class,'destroy']);
+Route::put('/galleries/{id}',[GalleryController::class,'update'])->middleware('auth:api');
+Route::delete('/galleries/{id}',[GalleryController::class,'destroy'])->middleware('auth:api');
 
-Route::get('/users/{id}',[UserController::class,'show']);
+Route::get('/users/{id}',[UserController::class,'show'])->middleware('auth:api');
 
-Route::post('/comments',[CommentsController::class,'store']);
+Route::post('/comments',[CommentsController::class,'store'])->middleware('auth:api');
 Route::get('/galleries/{id}/comments',[CommentsController::class,'index']);
-Route::delete('/comments/{id}',[CommentsController::class,'destroy']);
+Route::delete('/comments/{id}',[CommentsController::class,'destroy'])->middleware('auth:api');
