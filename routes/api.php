@@ -31,6 +31,8 @@ Route::get('me',[AuthController::class,'me']);
 Route::get('/galleries',[GalleryController::class,'index']);
 Route::post('/galleries',[GalleryController::class,'store']);
 Route::get('/galleries/{id}',[GalleryController::class,'show']);
+Route::put('/galleries/{id}',[GalleryController::class,'update']);
+Route::delete('/galleries/{id}',[GalleryController::class,'destroy']);
 
 Route::get('/users/{id}',[UserController::class,'show']);
 

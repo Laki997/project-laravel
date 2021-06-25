@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditGalleryRequest;
 use App\Http\Requests\GalleryRequest;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class GalleryController extends Controller
         $galleries = Gallery::where('naziv',"like","%$term%")->orderBy('id','DESC')->with('photos')->with('user')->paginate(10);
 
         if (!$galleries){
-            return response()->json(['message'=>'Nazalost ne postoji nijedna galerija, kreirajte novu!']);
+           return;
         }
 
         return $galleries;
@@ -79,7 +80,7 @@ class GalleryController extends Controller
         
         $gallery = $user->galleries()->create(['naziv' => $data['naziv'], 'opis' => $data['opis']]);
        
-        $gallery->photos()->createMany($photos);
+      return $gallery->photos()->createMany($photos);
       
     }
 
@@ -118,9 +119,39 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditGalleryRequest $request, $id)
     {
-        //
+
+        info($request);
+        $data = $request->validated();
+        // $user =auth('api')->user();
+        $gallery = Gallery::find($id);
+
+        $gallery->naziv = $request->input('naziv');
+        $gallery->opis = $request->input('opis');
+        // $gallery->user_id = $user->id;
+
+        $gallery->save();
+
+        $gallery->photos()->delete();
+        $imagesArray = $data['photos'];
+
+        $images = [];
+        
+        foreach($imagesArray as $image){
+            
+           $newImage = new Photo($image);
+
+           $images [] = $newImage;
+            
+        }
+        
+         $gallery->photos()->saveMany($images);
+
+         return $gallery;
+        
+
+      
     }
 
     /**
@@ -131,6 +162,6 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Gallery::find($id)->delete();
     }
 }
